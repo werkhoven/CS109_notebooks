@@ -1,0 +1,1516 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{cs109a\_hw0}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{ CS109A Introduction to Data
+Science}\label{cs109a-introduction-to-data-science}
+
+\subsection{Homework 0}\label{homework-0}
+
+\textbf{Harvard University} \textbf{Summer 2018} \textbf{Instructors}:
+Pavlos Protopapas and Kevin Rader
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+This is a homework which you must turn in.
+
+This homework has the following intentions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  To get you familiar with the jupyter/python environment.
+\item
+  You should easily understand these questions and what is being asked.
+  If you struggle, this may not be the right class for you.
+\item
+  You should be able to understand the intent (if not the exact syntax)
+  of the code and be able to look up on Google and provide code that is
+  asked of you. If you cannot, this may not be the right class for you.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} RUN THIS CELL TO GET THE RIGHT FORMATTING }
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+        \PY{k}{def} \PY{n+nf}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{styles} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C:/Users/werkh/OneDrive/Documents/CS109\PYZus{}notebooks/HW0/cs109.css}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n}{HTML}\PY{p}{(}\PY{n}{styles}\PY{p}{)}
+        \PY{n}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    
+
+    \subsection{Basic Math and Probability/Statistics
+Calculations}\label{basic-math-and-probabilitystatistics-calculations}
+
+    We'll start you off with some basic math and statistics problems
+questions to make sure you have the appropriate background to be
+comfortable with concepts that will come up in CS 109a.
+
+     Question 1: Mathiness is What Brings Us Together Today
+
+\paragraph{Matrix Operations}\label{matrix-operations}
+
+\emph{Complete the following matrix operations. \textbf{Note: Do not do
+this numerically and show your work as a markdown/latex} notebook cell}
+
+    \textbf{1.1.} ~~Let ~~ \$ A = \left(
+
+\begin{array}{ccc}
+3 & 4 & 2 \\
+5 & 6 & 4 \\
+4 & 3 & 4 \end{array}
+
+\right) ,,\$ and \$ ,, B = \left(
+
+\begin{array}{ccc}
+1 & 4 & 2 \\
+1 & 9 & 3 \\
+2 & 3 & 3 \end{array}
+
+\right) \$.
+
+Compute ~\(A \cdot B\).
+
+\textbf{1.2.} ~~Let ~~ \$ A = \left(
+
+\begin{array}{ccc}
+0 & 12 & 8 \\
+1 & 15 & 0 \\
+0 & 6 & 3 \end{array}
+
+\right)\$.
+
+Compute ~ \(A^{-1}\).
+
+    \textbf{Calculus and Probability}
+
+\emph{Complete the following (show your work as a markdown/latex
+notebook cell)}
+
+\textbf{1.3}. From Wikipedia:
+
+\begin{quote}
+In mathematical optimization, statistics, econometrics, decision theory,
+machine learning and computational neuroscience, a loss function or cost
+function is a function that maps an event or values of one or more
+variables onto a real number intuitively representing some "cost"
+associated with the event. An optimization problem seeks to minimize a
+loss function.
+\end{quote}
+
+We've generated a cost function on parameters \(x,y \in \mathcal{R}\)
+\(L(x,y)= 3x^2y - y^3 - 3x^2 - 3y^2 + 2\). Find the critical points
+(optima) of \(L(x,y)\).
+
+\textbf{1.4}. A central aspect of call center operations is the per
+minute statistics of caller demographics. Because of the massive call
+volumes call centers achieve, these per minute statistics can often take
+on well-known distributions. In the CS109 Homework Helpdesk, X and Y are
+discrete random variables with X measuring the number of female callers
+per minute and Y the total number of callers per minute. We've
+determined historically the joint pmf of (X, Y) and found it to be
+\[p_{X,Y}(x,y) = e^{-4}\frac{2^y}{x!(y-x)!}\] where
+\(y \in \mathbb{N}, x \in [0, y]\) (That is to say the total number of
+callers in a minute is a non-negative integer and the number of female
+callers naturally assumes a value between 0 and the total number of
+callers inclusive). Find the mean and variance of the marginal
+distribution of \(X\).
+
+\textbf{Hints: } 1. \(x \in \left[0,y\right] \Rightarrow x < y\). 2. You
+may find the change of variable \(z = y-x\) helpful. 3. Recall:
+\[ \sum_{z=0}^{\infty}\frac{2^{z}}{z!}  =e^{2}\]
+
+    \textbf{Basic Statistics}
+
+\emph{Complete the following: you can perform the calculations by hand
+(show your work) or using software (include the code and
+output...screenshots are fine if it is from another platform).}
+
+\textbf{1.5}. 37 of the 76 female CS concentrators have taken Data
+Science 1 (DS1) while 50 of the 133 male concentrators haven taken DS1.
+Perform a statistical test to determine if interest in Data Science (by
+taking DS1) ios related to sex. Be sure to state your conclusion.
+
+    \paragraph{Answers}\label{answers}
+
+    \textbf{1.1}
+
+    Let ~ \(C = A \cdot B\)
+
+To compute C, we compute the dot product for each row of A with each
+column of B. For example, the first value of C:
+
+\(C_{1,1} = x \cdot y\) ~ where ~
+\(x = \begin{bmatrix} a_{1,1} \\ a_{1,2} \\ a_{1,3} \end{bmatrix}\) and
+~ \(y = \begin{bmatrix} b_{1,1} & b_{2,1} & b_{3,1}\end{bmatrix}\)
+
+\(x \cdot y = a_{1,1}b_{1,1} + a_{1,2}b_{2,1} + a_{1,3}b_{3,1} = 3\times1 + 4\times1 + 2\times2 = 11\)
+
+Repeating the process of calculating the dot product of each row of A
+with each column of B yields the resulting 3x3 matrix
+
+\(C = \begin{bmatrix} 11 & 54 & 24 \\ 19 & 86 & 40\\ 15 & 55 & 29 \end{bmatrix}\)
+
+We can also calculate the result programmatically with the following
+python code
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{4}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}\OperatorTok{;}
+\NormalTok{B }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{,  }\DecValTok{2}\NormalTok{],[}\DecValTok{1}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{3}\NormalTok{],[}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{]])}\OperatorTok{;}
+\NormalTok{C }\OperatorTok{=}\NormalTok{ np.matmul(A,B)}\OperatorTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+    \textbf{1.2}
+
+    Let ~ \(B = A^{-1}\)
+
+We can calculate the inverse of A as
+
+\(B = \frac{1}{determinant(A)}adjugate(a)\)
+
+or we can reduce a matrix ~ \([AI]\) ~ to the form ~ \([IB]\) ~ where
+\(I\) is the identity matrix
+
+\\
+\${[}A I{]} = \left[ \begin{array}{ccc|ccc}
+a_{1,1} & a_{1,2} & a_{1,3} & 1 & 0 & 0 \\
+a_{2,1} & a_{2,2} & a_{2,3} & 0 & 1 & 0 \\
+a_{3,1} & a_{3,2} & a_{3,3} & 0 & 0 & 1 \\
+\end{array} \right]
+\$ substituting in the values of A, and switching \(R_2\) and \(R_1\) we
+get
+
+\\
+\${[}A I{]} = \left[ \begin{array}{ccc|ccc}
+1 & 15 & 0 & 0 & 1 & 0 \\
+0 & 12 & 8 & 1 & 0 & 0 \\
+0 & 6 & 3 & 0 & 0 & 1 \\
+\end{array} \right]
+\$
+
+\\
+\(\frac{1}{12}R_2\) → ~
+
+\$\left[ \begin{array}{ccc|ccc}
+1 & 15 & 0 & 0 & 1 & 0 \\
+0 & 1 & \frac{8}{12} & \frac{1}{12} & 0 & 0 \\
+0 & 6 & 3 & 0 & 0 & 1 \\
+\end{array} \right]
+\$
+
+\\
+\(-1R_3 - 6R_2\) → ~
+
+\$\left[ \begin{array}{ccc|ccc}
+1 & 15 & 0 & 0 & 1 & 0 \\
+0 & 1 & \frac{8}{12} & \frac{1}{12} & 0 & 0 \\
+0 & 0 & 1 & \frac{1}{2} & 0 & -1 \\
+\end{array} \right]
+\$
+
+\\
+\(R_2 + \frac{-8}{12}R_3\) → ~
+
+\$\left[ \begin{array}{ccc|ccc}
+1 & 15 & 0 & 0 & 1 & 0 \\
+0 & 1 & 0 & \frac{-3}{12} & 0 & \frac{8}{12} \\
+0 & 0 & 1 & \frac{1}{2} & 0 & -1 \\
+\end{array} \right]
+\$
+
+\\
+\(R_1 - 15R_2\) → ~
+
+\${[}IB{]} = \left[ \begin{array}{ccc|ccc}
+1 & 0 & 0 & \frac{45}{12} & 1 & -10 \\
+0 & 1 & 0 & \frac{-3}{12} & 0 & \frac{8}{12} \\
+0 & 0 & 1 & \frac{1}{2} & 0 & -1 \\
+\end{array} \right]
+\$
+
+\\
+with the left-hand side of the matrix equal to \(I\), we can find
+\(A^{-1}\) on the right-hand side
+
+\$B = \left[ \begin{array}{ccc}
+\frac{45}{12} & 1 & -10 \\
+\frac{-3}{12} & 0 & \frac{8}{12} \\
+\frac{1}{2} & 0 & -1 \\
+\end{array} \right]
+\$
+
+We can also check out work with python
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[  3.75         1.         -10.        ]
+ [ -0.25         0.           0.66666667]
+ [  0.5         -0.          -1.        ]]
+
+    \end{Verbatim}
+
+    \textbf{1.3}
+
+    To find the critical points of \(L(x,y)\), we have to find the points of
+the function where
+
+\[ \frac{\delta L}{\delta x} = 0 \quad \textrm{and} \quad \frac{\delta L}{\delta y} = 0\]
+
+Let ~ \(L(x,y)=3x^2y−y^3−3x^2−3y^2+2\)
+
+ \[\frac{\delta L}{\delta x} = 6xy-6x = 6x(y-1)\]
+\[\frac{\delta L}{\delta x}=0 \quad when \quad x=0 \quad or \quad y=1\]
+
+Since we know that \(\frac{\delta L}{\delta x}=0\) ~ when ~ \(x=0\) ~ or
+~ \(y=1\), we can evaluate \(\frac{\delta L}{\delta y}\) at those values
+to simplify. Solving for \(\frac{\delta L}{\delta y}\) we find
+\[\frac{\delta L}{\delta y} = 3x^2-3y^2-6y\]
+
+Evaluating ~\(\frac{\delta L}{\delta y}\) ~ at ~ \(x=0\)
+
+ \[\frac{\delta L}{\delta y} = 3(0)^2-3y^2-6y\]
+\[\frac{\delta L}{\delta y} = -3y^2-6y\]
+\[\frac{\delta L}{\delta y} = -3y(y+2)\]
+
+Therefor when ~ \(x=0\) \[\frac{\delta L}{\delta y}=0\]
+\[at \quad y=0 \quad and \quad y=-2\]
+
+Evaluating ~\(\frac{\delta L}{\delta y}\) ~ at ~ \(y=1\)
+
+ \[\frac{\delta L}{\delta y} = 3x^2-3(1)^2-6(1)\]
+\[\frac{\delta L}{\delta y} = 3x^2-9\]
+\[\frac{\delta L}{\delta y} = -3(x^2-3)\]
+
+Therefor when ~ \(y=1\) \[\frac{\delta L}{\delta y}=0\]
+\[at \quad x=\pm\sqrt{3}\]
+
+Therefor \(L(x,y)\) has critical points at
+
+\(\begin{array}{c|c} x & y\\ \hline 0 & 0\\ 0 & -2\\ \sqrt{3} & 1\\ -\sqrt{3} & 1\\ \end{array}\)
+
+    \textbf{1.4}
+
+    Let ~ \(P_{xy}(x,y) = e^{-4}\frac{2^y}{x!(y-x)!}\)
+
+ The marginal distribution of \(x\) is given by
+
+\[P_x(x)=\sum_{y=0}^{\infty}P_{xy}(x,y)\]
+
+ We can simplify ~ \(P_{xy}(x,y)\) ~ to ~ \(P_{xz}(x,z)\) ~ substituting
+in the variable ~ \(z=y-x\) \[P_{xz}(x,z) = e^{-4}\frac{2^x2^z}{x!z!}\]
+
+Therefore
+
+\[P_x(x)=\sum_{z=0}^{\infty}P_{xz}(x,y)\]
+
+\[P_x(x)=\sum_{z=0}^{\infty}e^{-4}\frac{2^x2^z}{x!z!}\]
+
+\[P_x(x)=e^{-4}\frac{2^x}{x!}\sum_{z=0}^{\infty}\frac{2^z}{z!}\]
+
+Recalling that
+
+\[\sum_{z=0}^{\infty}\frac{2^z}{z!}=e^2\]
+
+We can simplify \(P_x(x)\)
+
+\[P_x(x)=e^{-4}\frac{2^x}{x!}e^2\]
+
+\[P_x(x)=\frac{2^xe^{-2}}{x!}\]
+
+Recognizing that looks the form of the poisson distribution
+
+\[\frac{\lambda^ke^{-\lambda}}{k!}\]
+
+and knowing that the mean and variance of the poisson distribution is
+the rate constant \(\lambda\), the mean and variance of the marginal
+distribution of \(x\) is
+
+ \[\mu=2, \quad \sigma=2\]
+
+    \textbf{1.5}
+
+    We can use a z-test to compare the null hypothesis \(p_f=p_m\), to the
+alternative, \(p_f\neq p_m\) where \(p_f\) is the probability of a
+female enrolling and \(p_m\) is the probability of a male enrolling.
+
+The z test statistic is given by
+
+\[z=\frac{\hat{p_f}-\hat{p_m}}{\sqrt{\hat{p_j}(1-\hat{p_j})(\frac{1}{n_f}+\frac{1}{n_m})}}\]
+
+where the ~ \(\hat{p_f}\), ~ \(\hat{p_m}\), ~ and \(\hat{p_j}\) ~ are
+the observed female, male, and joint probabilities respectively
+
+\[\hat{p_f} = \frac{37}{76} = 0.487\]
+
+\[\hat{p_m} = \frac{50}{133} = 0.376\]
+
+\[\hat{p_j} = \frac{37+50}{76+133} = 0.416\]
+
+using python to do the computation
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{pf} \PY{o}{=} \PY{l+m+mf}{0.487}
+        \PY{n}{pm} \PY{o}{=} \PY{l+m+mf}{0.376}
+        \PY{n}{pj} \PY{o}{=} \PY{l+m+mf}{0.416}
+        \PY{n}{nf} \PY{o}{=} \PY{l+m+mi}{76}
+        \PY{n}{nm} \PY{o}{=} \PY{l+m+mi}{133}
+        
+        \PY{n}{z} \PY{o}{=} \PY{p}{(}\PY{n}{pf}\PY{o}{\PYZhy{}}\PY{n}{pm}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{pj}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{pj}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{nf} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{/}\PY{n}{nm}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.5661356065480148
+
+    \end{Verbatim}
+
+    This will be a two-tailed test since our probabilities could be either
+above or below the null hypothesis. We find the \(z-score = 1.57\),
+which is well inside of \(z=\pm 1.96\), the critical region values
+corresponding to a confidence level of 95\%. Therefore we cannot
+conclude that the data shows a significant difference between male and
+female enrollment
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} RUN THIS CELL }
+        \PY{c+c1}{\PYZsh{} The line \PYZpc{}... is a jupyter \PYZdq{}magic\PYZdq{} command, and is not part of the Python language.}
+        \PY{c+c1}{\PYZsh{} In this case we\PYZsq{}re just telling the plotting library to draw things on}
+        \PY{c+c1}{\PYZsh{} the notebook, instead of on a separate window.}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{c+c1}{\PYZsh{} See the \PYZdq{}import ... as ...\PYZdq{} contructs below? They\PYZsq{}re just aliasing the package names.}
+        \PY{c+c1}{\PYZsh{} That way we can call methods like plt.plot() instead of matplotlib.pyplot.plot().}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{sp}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \subsection{Simulation of a Coin
+Throw}\label{simulation-of-a-coin-throw}
+
+We'd like to do some experiments with coin flips, but we don't have a
+physical coin at the moment. So let's \textbf{simulate} the process of
+flipping a coin on a computer. To do this we will use a form of the
+\textbf{random number generator} built into \texttt{numpy}. In
+particular, we will use the function \texttt{np.random.choice} which
+picks items with uniform probability from a list. If we provide it a
+list {[}'H', 'T'{]}, it will pick one of the two items in the list. We
+can also ask it to do this multiple times by specifying the parameter
+\texttt{size}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{n}{n\PYZus{}trials}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{n\PYZus{}trials}\PY{p}{)}
+\end{Verbatim}
+
+
+    \texttt{np.sum} is a function that returns the sum of items in an
+iterable (i.e. a list or an array). Because python coerces \texttt{True}
+to 1 and \texttt{False} to 0, the effect of calling \texttt{np.sum} on
+the array of \texttt{True}s and \texttt{False}s will be to return the
+number of of \texttt{True}s in the array (which can then effectively
+count the number of heads).
+
+     Question 2: The 12 Labors of Bernoullis
+
+Now that we know how to run our coin flip experiment, we're interested
+in knowing what happens as we choose larger and larger number of coin
+flips.
+
+\textbf{2.1}. Run one experiment of flipping a coin 40 times storing the
+resulting sample in the variable \texttt{throws1}. What's the total
+proportion of heads?
+
+\textbf{2.2}. \textbf{Replicate} the experiment in 2.1 storing the
+resulting sample in the variable \texttt{throws2}. What's the proportion
+of heads? How does this result compare to that you obtained in question
+2.1?
+
+\textbf{2.3}. Write a function called \texttt{run\_trials} that takes as
+input a list, called \texttt{n\_flips}, of integers representing
+different values for the number of coin flips in a trial. For each
+element in the input list, \texttt{run\_trials} should run the coin flip
+experiment with that number of flips and calculate the proportion of
+heads. The output of \texttt{run\_trials} should be the list of
+calculated proportions. Store the output of calling \texttt{run\_trials}
+in a list called \texttt{proportions}.
+
+\textbf{2.4}. Using the results in 2.3, reproduce the plot below.
+
+\textbf{2.5}. What's the appropriate observation about the result of
+running the coin flip experiment with larger and larger numbers of coin
+flips? Choose the appropriate one from the choices below and explain
+why.
+
+\begin{quote}
+A. Regardless of sample size the probability of in our experiment of
+observing heads is 0.5 so the proportion of heads observed in the
+coin-flip experiments will always be 0.5.
+
+B. The proportions \textbf{fluctuate} about their long-run value of 0.5
+(what you might expect if you tossed the coin an infinite amount of
+times), in accordance with the notion of a fair coin (which we encoded
+in our simulation by having \texttt{np.random.choice} choose between two
+possibilities with equal probability), with the fluctuations seeming to
+become much smaller as the number of trials increases.
+
+C. The proportions \textbf{fluctuate} about their long-run value of 0.5
+(what you might expect if you tossed the coin an infinite amount of
+times), in accordance with the notion of a fair coin (which we encoded
+in our simulation by having \texttt{np.random.choice} choose between two
+possibilities with equal probability), with the fluctuations constant
+regardless of the number of trials.
+\end{quote}
+
+    \paragraph{Answers}\label{answers}
+
+    \textbf{2.1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{nThrows} \PY{o}{=} \PY{l+m+mi}{40}
+        \PY{n}{throws1} \PY{o}{=} \PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{n}{nThrows}\PY{p}{)}
+        \PY{n}{nHeads1} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{throws1}\PY{p}{:}
+            \PY{k}{if} \PY{n}{i}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{n}{nHeads1} \PY{o}{=} \PY{n}{nHeads1} \PY{o}{+} \PY{l+m+mi}{1}
+                
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{nHeads1}\PY{o}{/}\PY{n}{nThrows}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.425
+
+    \end{Verbatim}
+
+    \textbf{2.2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{nThrows} \PY{o}{=} \PY{l+m+mi}{40}
+        \PY{n}{throws2} \PY{o}{=} \PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{n}{nThrows}\PY{p}{)}
+        \PY{n}{nHeads2} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{throws2}\PY{p}{:}
+            \PY{k}{if} \PY{n}{i}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{n}{nHeads2} \PY{o}{=} \PY{n}{nHeads2} \PY{o}{+} \PY{l+m+mi}{1}
+                
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{nHeads2}\PY{o}{/}\PY{n}{nThrows}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{(}\PY{n}{nHeads1} \PY{o}{+} \PY{n}{nHeads2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{nThrows}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.55
+0.4875
+
+    \end{Verbatim}
+
+    The fraction of heads across the two trials are 0.53 and 0.45
+respectively. The results are different.
+
+    \textbf{2.3}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{n\PYZus{}flips} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{70}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{130}\PY{p}{,} \PY{l+m+mi}{170}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}trials}\PY{p}{(}\PY{n}{n\PYZus{}flips}\PY{p}{)}\PY{p}{:}
+        
+            \PY{n}{proportions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{n\PYZus{}flips}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{nHeads} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{throws} \PY{o}{=} \PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{n}{n\PYZus{}flips}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{throws}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{j}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{nHeads} \PY{o}{=} \PY{n}{nHeads}\PY{o}{+}\PY{l+m+mi}{1}
+                        
+                \PY{n}{proportions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{nHeads}\PY{o}{/}\PY{n}{n\PYZus{}flips}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                
+            \PY{k}{return}\PY{p}{(}\PY{n}{proportions}\PY{p}{)}
+                
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{proportions} \PY{o}{=} \PY{n}{run\PYZus{}trials}\PY{p}{(}\PY{n}{n\PYZus{}flips}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{proportions}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.7, 0.36666666666666664, 0.56, 0.44285714285714284, 0.52, 0.5, 0.5235294117647059, 0.505, 0.524, 0.514, 0.496, 0.4978, 0.501]
+
+    \end{Verbatim}
+
+    \textbf{2.4}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         
+         \PY{n}{ph}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{n\PYZus{}flips}\PY{p}{,}\PY{n}{proportions}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num trials}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fraction heads}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n\PYZus{}flips}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} [<matplotlib.lines.Line2D at 0x262bdc47470>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{2.5}
+
+    \textbf{What's the appropriate observation about the result of applying
+the coin flip experiment to larger and larger numbers of coin flips?
+Choose the appropriate one.}
+
+B. The fluctuation observed decreases as the sample size increases, as
+is consistent with the standard error of the mean. The standard error
+should go down as the square root of the number of trials.
+
+    \subsection{Multiple Replications of the Coin Flip
+Experiment}\label{multiple-replications-of-the-coin-flip-experiment}
+
+The coin flip experiment that we did above gave us some insight, but we
+don't have a good notion of how robust our results are under repetition
+as we've only run one experiment for each number of coin flips. Lets
+redo the coin flip experiment, but let's incorporate multiple
+repetitions of each number of coin flips. For each choice of the number
+of flips, \(n\), in an experiment, we'll do \(M\) replications of the
+coin tossing experiment.
+
+     Question 3. So Many Replications
+
+\textbf{3.1}. Write a function \texttt{make\_throws} which takes as
+arguments the \texttt{n\_replications} (\(M\)) and the \texttt{n\_flips}
+(\(n\)), and returns a list (of size \(M\)) of proportions, with each
+proportion calculated by taking the ratio of heads to to total number of
+coin flips in each replication of \(n\) coin tosses. \texttt{n\_flips}
+should be a python parameter whose value should default to 20 if
+unspecified when \texttt{make\_throws} is called.
+
+\textbf{3.2}. Create the variables
+\texttt{proportions\_at\_n\_flips\_100} and
+\texttt{proportions\_at\_n\_flips\_1000}. Store in these variables the
+result of \texttt{make\_throws} for \texttt{n\_flips} equal to 100 and
+1000 respectively while keeping \texttt{n\_replications} at 200. Create
+a plot with the histograms of \texttt{proportions\_at\_n\_flips\_100}
+and \texttt{proportions\_at\_n\_flips\_1000}. Make sure to title your
+plot, label the x-axis and provide a legend.(See below for an example of
+what the plot may look like) \includegraphics{./figs/HW0Plot2.png}
+
+\textbf{3.3}. Calculate the mean and variance of the results in the each
+of the variables \texttt{proportions\_at\_n\_flips\_100} and
+\texttt{proportions\_at\_n\_flips\_1000} generated in 3.2.
+
+\textbf{3.4}. Based upon the plots what would be your guess of what type
+of distribution is represented by histograms in 3.2? Explain the factors
+that influenced your choice. \textgreater{} A. Gamma Distribution
+\textgreater{} \textgreater{} B. Beta Distribution \textgreater{}
+\textgreater{} C. Gaussian
+
+\textbf{3.5}. Let's just assume for arguments sake that the answer to
+3.4 is \textbf{C. Gaussian}. Plot a \textbf{normed histogram} of your
+results \texttt{proportions\_at\_n\_flips\_1000} overlayed with your
+selection for the appropriate gaussian distribution to represent the
+experiment of flipping a coin 1000 times. (\textbf{Hint: What parameters
+should you use for your Gaussian?})
+
+    \textbf{3.1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}throws}\PY{p}{(}\PY{n}{n\PYZus{}reps}\PY{p}{,} \PY{n}{n\PYZus{}flips}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+                 
+             \PY{n}{proportions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{run\PYZus{}trials}\PY{p}{(}\PY{n}{n\PYZus{}flips}\PY{p}{)} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}reps}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{proportions}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{3.2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{n\PYZus{}reps} \PY{o}{=} \PY{l+m+mi}{200}
+         \PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}100} \PY{o}{=} \PY{n}{make\PYZus{}throws}\PY{p}{(}\PY{n}{n\PYZus{}reps}\PY{p}{,} \PY{n}{n\PYZus{}flips} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+         \PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}1000} \PY{o}{=} \PY{n}{make\PYZus{}throws}\PY{p}{(}\PY{n}{n\PYZus{}reps}\PY{p}{,} \PY{n}{n\PYZus{}flips} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}100}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}1000}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0.49 0.58 0.46 0.48 0.55 0.47 0.56 0.5  0.45 0.5  0.54 0.52 0.41 0.51
+  0.56 0.35 0.57 0.46 0.46 0.52 0.51 0.45 0.45 0.51 0.47 0.56 0.46 0.37
+  0.49 0.52 0.53 0.47 0.51 0.45 0.49 0.6  0.5  0.45 0.5  0.51 0.52 0.6
+  0.46 0.48 0.5  0.53 0.57 0.49 0.56 0.45 0.51 0.56 0.42 0.46 0.53 0.5
+  0.54 0.5  0.49 0.45 0.55 0.46 0.56 0.51 0.45 0.51 0.44 0.5  0.43 0.54
+  0.47 0.55 0.46 0.51 0.52 0.46 0.53 0.49 0.62 0.51 0.45 0.54 0.45 0.46
+  0.55 0.56 0.53 0.55 0.46 0.48 0.45 0.57 0.49 0.38 0.55 0.55 0.56 0.51
+  0.58 0.53 0.54 0.46 0.46 0.39 0.46 0.52 0.52 0.52 0.52 0.45 0.47 0.41
+  0.38 0.58 0.47 0.58 0.58 0.53 0.46 0.48 0.46 0.39 0.5  0.47 0.43 0.52
+  0.43 0.47 0.47 0.53 0.53 0.52 0.52 0.43 0.51 0.43 0.53 0.5  0.41 0.52
+  0.54 0.59 0.49 0.51 0.5  0.57 0.5  0.46 0.55 0.53 0.53 0.52 0.55 0.46
+  0.56 0.55 0.52 0.42 0.5  0.52 0.46 0.49 0.41 0.55 0.53 0.48 0.57 0.53
+  0.44 0.59 0.35 0.47 0.49 0.52 0.51 0.45 0.44 0.35 0.44 0.45 0.51 0.38
+  0.42 0.48 0.56 0.57 0.48 0.54 0.52 0.49 0.43 0.59 0.61 0.43 0.49 0.44
+  0.48 0.48 0.5  0.48]]
+[[0.494 0.48  0.482 0.478 0.472 0.514 0.522 0.481 0.498 0.487 0.522 0.515
+  0.477 0.489 0.499 0.509 0.477 0.493 0.496 0.51  0.473 0.492 0.521 0.483
+  0.485 0.515 0.51  0.494 0.489 0.515 0.503 0.506 0.497 0.489 0.507 0.501
+  0.479 0.482 0.488 0.484 0.507 0.496 0.508 0.498 0.483 0.48  0.503 0.487
+  0.511 0.485 0.478 0.49  0.514 0.505 0.509 0.519 0.483 0.519 0.496 0.496
+  0.536 0.471 0.489 0.483 0.5   0.505 0.485 0.506 0.469 0.487 0.504 0.502
+  0.499 0.483 0.486 0.523 0.483 0.491 0.5   0.486 0.503 0.513 0.5   0.499
+  0.519 0.491 0.505 0.512 0.538 0.496 0.506 0.53  0.497 0.513 0.499 0.49
+  0.495 0.518 0.497 0.527 0.496 0.51  0.487 0.492 0.513 0.526 0.5   0.518
+  0.501 0.498 0.517 0.525 0.497 0.508 0.511 0.492 0.508 0.505 0.49  0.495
+  0.487 0.509 0.502 0.471 0.52  0.47  0.507 0.51  0.525 0.485 0.465 0.458
+  0.52  0.512 0.505 0.536 0.518 0.51  0.525 0.502 0.51  0.506 0.482 0.51
+  0.475 0.477 0.513 0.499 0.487 0.517 0.522 0.496 0.528 0.485 0.526 0.527
+  0.501 0.492 0.501 0.503 0.466 0.476 0.507 0.502 0.478 0.497 0.484 0.523
+  0.497 0.504 0.469 0.471 0.498 0.471 0.518 0.508 0.489 0.507 0.521 0.502
+  0.489 0.487 0.504 0.519 0.514 0.508 0.501 0.526 0.508 0.493 0.487 0.507
+  0.493 0.525 0.489 0.515 0.506 0.5   0.494 0.491]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}100}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{100 flips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}1000}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1000 flips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fraction heads}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{histogram of coin flip repetitions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}werkh\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+C:\textbackslash{}Users\textbackslash{}werkh\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} <matplotlib.legend.Legend at 0x262c02399b0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{3.3}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{mu\PYZus{}100} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}100}\PY{p}{)}
+         \PY{n}{mu\PYZus{}1000} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}1000}\PY{p}{)}
+         \PY{n}{std\PYZus{}100} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}100}\PY{p}{)}
+         \PY{n}{std\PYZus{}1000} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}1000}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{100 flips mean = }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s1}{, std = }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}}\PY{p}{(} \PY{n}{mu\PYZus{}100}\PY{p}{,} \PY{n}{std\PYZus{}100}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{100 flips mean = }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s1}{, std = }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}}\PY{p}{(} \PY{n}{mu\PYZus{}1000}\PY{p}{,} \PY{n}{std\PYZus{}1000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100 flips mean = 0.50, std = 0.05
+100 flips mean = 0.50, std = 0.02
+
+    \end{Verbatim}
+
+    \textbf{3.4}
+
+    The values appear to be normally distributed since the mean and shape of
+the distribution does not appear to change with increased sampling
+(apart from the dispersion)
+
+    \textbf{3.5}
+
+    Coin flips should be binomially distributed, with the probability of a
+heads \(p_{h}=0.5\)
+
+For a binomial distribution, ~ \(\mu=np_{h}\) ~ and ~
+\(\sigma=\sqrt{np_{h}(1-p_{h})}\)
+
+The binomial distributions approaches the normal distribution for large
+values of n, and since we are running 1000 flips for each repetition, it
+is reasonable to assume that it should approach the normal distribution.
+Since we are interested in the proportion, and not the total number of
+successes. Therefore, I'll plot
+
+ \[N(\mu, \sigma)\]
+
+\[where\]
+
+\[\mu=np_h=(1000)(0.5)=500\]
+
+\[\sigma=\sqrt{np_{h}(1-p_{h})}=\sqrt{(1000)(0.5)(0.5)}=15.8\] 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} normalize throw data}
+         \PY{n}{normalized\PYZus{}flips\PYZus{}1000} \PY{o}{=} \PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}1000}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}1000}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} gaussian parameters}
+         \PY{n}{mu} \PY{o}{=} \PY{l+m+mf}{0.5}
+         \PY{n}{sig} \PY{o}{=} \PY{l+m+mf}{0.0158}
+         \PY{n}{my\PYZus{}gauss} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{sig}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{mu}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{sig}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{gauss\PYZus{}dist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{my\PYZus{}gauss}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{gauss\PYZus{}dist}\PY{p}{,} \PY{n}{LineWidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{proportions\PYZus{}n\PYZus{}flips\PYZus{}1000}\PY{p}{,} \PY{n}{normed}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{observed data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}werkh\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.legend.Legend at 0x262c137d4a8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Working With Distributions in
+Numpy/Scipy}\label{working-with-distributions-in-numpyscipy}
+
+Earlier in this problem set we've been introduced to the Bernoulli "aka
+coin-flip" distribution and worked with it indirectly by using
+np.random.choice to make a random selection between two elements 'H' and
+'T'. Let's see if we can create comparable results by taking advantage
+of the machinery for working with other probability distributions in
+python using numpy and scipy.
+
+     Question 4: My Normal Binomial
+
+Let's use our coin-flipping machinery to do some experimentation with
+the binomial distribution. The binomial distribution, often represented
+by \(k \sim Binomial(n, p)\) is often discribed the number of successes
+in \texttt{n} Bernoulli trials with each trial having a probability of
+success \texttt{p}. In other words, if you flip a coin \texttt{n} times,
+and each coin-flip has a probability \texttt{p} of landing heads, then
+the number of heads you observe is a sample from a binomial
+distribution.
+
+\textbf{4.1}. Sample the binomial distribution with \(p = 0.5\) using
+coin flips by writing a function \texttt{sample\_binomial1} which takes
+in integer parameters \texttt{n} and \texttt{size}. The output of
+\texttt{sample\_binomial1} should be a list of length \texttt{size}
+observations with each observation being the outcome of flipping a coin
+\texttt{n} times and counting the number of heads. By default
+\texttt{size} should be 1. Your code should take advantage of the
+\texttt{throw\_a\_coin} function we defined above.
+
+\textbf{4.2}. Sample the binomial distribution directly using
+scipy.stats.binom.rvs by writing another function
+\texttt{sample\_binomial2} that takes in integer parameters \texttt{n}
+and \texttt{size} as well as a float \texttt{p} parameter \texttt{p}
+where \(p \in [0 \ldots 1]\). The output of \texttt{sample\_binomial2}
+should be a list of length \texttt{size} observations with each
+observation a sample of \(Binomial(n, p)\) (taking advantage of
+scipy.stats.binom). By default \texttt{size} should be 1 and \texttt{p}
+should be 0.5.
+
+\textbf{4.3}. Run sample\_binomial1 with 25 and 200 as values of the
+\texttt{n} and \texttt{size} parameters respectively and store the
+result in \texttt{binomial\_trials1}. Run sample\_binomial2 with 25, 200
+and 0.5 as values of the \texttt{n}, \texttt{size} and \texttt{p}
+parameters respectively and store the results in
+\texttt{binomial\_trials2}. Plot normed histograms of
+\texttt{binomial\_trials1} and \texttt{binomial\_trials2}. On both
+histograms, overlay a plot of the pdf of \(Binomial(n=25, p=0.5)\)
+
+\textbf{4.4}. How do the plots in 4.3 compare?
+
+\textbf{4.5}. Find the mean and variance of \texttt{binomial\_trials1}.
+How do they compare to the true mean and varaince of a
+\(Binomial(n=25, p=0.5)\) distribution?
+
+    \paragraph{Answers}\label{answers}
+
+    \textbf{4.1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{sample\PYZus{}binomial1}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{n\PYZus{}heads} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{size}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{n\PYZus{}heads}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{flips} \PY{o}{=} \PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{n}{n}\PY{p}{)}      
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{flips}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{j}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                         \PY{n}{n\PYZus{}heads}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                         
+             \PY{k}{return}\PY{p}{(}\PY{n}{n\PYZus{}heads}\PY{p}{)}
+                 
+         \PY{n}{n\PYZus{}heads} \PY{o}{=} \PY{n}{sample\PYZus{}binomial1}\PY{p}{(}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}    
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{n\PYZus{}heads}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[18. 27. 20. 16. 24. 21. 23. 23. 29. 20. 21. 18. 19. 14. 21. 21. 25. 27.
+ 20. 24.]
+
+    \end{Verbatim}
+
+    \textbf{4.2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{binom}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{binom}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[19 16 14 18 13 12 20 15 14 17 11 15 15 18 12 13 16 16 16 17]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{binom}
+         
+         \PY{k}{def} \PY{n+nf}{sample\PYZus{}binomial2}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+         
+             \PY{k}{return}\PY{p}{(}\PY{n}{binom}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{n}{p}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{size}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{n\PYZus{}successes} \PY{o}{=} \PY{n}{sample\PYZus{}binomial2}\PY{p}{(}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{n\PYZus{}successes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[17 24 19 15 20 21 16 21 20 18 20 19 21 25 16 19 16 19 22 21 21 22 19 19
+ 20 13 23 14 23 23 17 18 21 19 19 17 17 18 18 17 15 24 16 22 19 20 15 15
+ 18 20 20 21 17 19 23 24 20 22 17 19 24 19 19 18 19 21 20 23 29 23 20 18
+ 23 20 22 23 20 20 14 18 19 24 23 20 15 18 16 18 21 20 15 20 21 15 21 16
+ 23 17 15 18]
+
+    \end{Verbatim}
+
+    \textbf{4.3}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{25}
+         \PY{n}{sz} \PY{o}{=} \PY{l+m+mi}{200}
+         
+         \PY{n}{binomial\PYZus{}trials1} \PY{o}{=} \PY{n}{sample\PYZus{}binomial1}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{sz}\PY{p}{)}
+         \PY{n}{binomial\PYZus{}trials2} \PY{o}{=} \PY{n}{sample\PYZus{}binomial2}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{sz}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{n}{p}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{binomial\PYZus{}trials1}\PY{p}{,} \PY{n}{normed}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}binom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{binomial\PYZus{}trials2}\PY{p}{,} \PY{n}{normed}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZus{}binom2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{binom}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.0001}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{,}\PY{n}{binom}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.999999}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{binom}\PY{o}{.}\PY{n}{pmf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ms}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binom pmf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num heads}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-20-ae9653bdb7a1> in <module>()
+          3 
+          4 binomial\_trials1 = sample\_binomial1(n, size=sz)
+    ----> 5 binomial\_trials2 = sample\_binomial2(n, size=sz, p=p)
+          6 
+          7 plt.hist(binomial\_trials1, normed=True, alpha=0.5, label='sample\_binom1')
+    
+
+        NameError: name 'p' is not defined
+
+    \end{Verbatim}
+
+    \textbf{4.4}
+
+    The distributions of the two random sampling methods appear
+qualitatively the same and are both show some error around the PDF,
+which is expected due to sampling.
+
+    \textbf{4.5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mu\PYZus{}100} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{binomial\PYZus{}trials1}\PY{p}{)}
+        \PY{n}{std\PYZus{}100} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{binomial\PYZus{}trials1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{mu\PYZus{}100}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{std\PYZus{}100}\PY{p}{)}
+\end{Verbatim}
+
+
+    The observed mean and standard deviation are
+
+\[\mu=12.405, \quad \sigma=2.38\]
+
+The true mean and variance for \(Binomial(n=25, p=0.5)\)
+
+\[\mu=np=(25)(0.5)=12.5\]
+\[\sigma=\sqrt{np(1-p)}=\sqrt{(25)(0.5)(0.5)}=2.5\]
+
+    \subsection{Testing Your Python Code}\label{testing-your-python-code}
+
+    In the following section we're going to do a brief introduction to unit
+testing. We do so not only because unit testing has become an
+increasingly important part of of the methodology of good software
+practices, but also because we plan on using unit tests as part of our
+own CS109 grading practices as a way of increasing rigor and
+repeatability decreasing complexity and manual workload in our
+evaluations of your code. We'll provide an example unit test at the end
+of this section.
+
+\subsubsection{Introduction to unit
+testing}\label{introduction-to-unit-testing}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{ipytest}
+\end{Verbatim}
+
+
+    \textbf{\emph{Unit testing}} is one of the most important software
+testing methodologies. Wikipedia describes unit testing as "a software
+testing method by which individual units of source code, sets of one or
+more computer program modules together with associated control data,
+usage procedures, and operating procedures, are tested to determine
+whether they are fit for use."
+
+There are many different python libraries that support software testing
+in general and unit testing in particular. PyTest is one of the most
+widely used and well-liked libraries for this purpose. We've chosen to
+adopt PyTest (and ipytest which allows pytest to be used in ipython
+notebooks) for our testing needs and we'll do a very brief introduction
+to Pytest here so that you can become familiar with it too.
+
+If you recall the function that we provided you above
+\texttt{throw\_a\_coin}, which we'll reproduce here for convenience, it
+took a number and returned that many "coin tosses". We'll start by
+seeing what happens when we give it different sizes of \(N\). If we give
+\(N=0\), we should get an empty array of "experiments".
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{N}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    Great! If we give it positive values of \(N\) we should get that number
+of 'H's and 'T's.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+    Exactly what we expected!
+
+What happens if the input isn't a positive integer though?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{l+m+mf}{4.5}\PY{p}{)}
+\end{Verbatim}
+
+
+    or
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    It looks like for both real numbers and negative numbers, we get two
+kinds of errors a \texttt{TypeError} and a \texttt{ValueError}. We just
+engaged in one of the most rudimentary forms of testing, trial and
+error. We can use pytest to automate this process by writing some
+functions that will automatically (and potentially repeatedly) test
+individual units of our code methodology. These are called
+\textbf{\emph{unit tests}}.
+
+Before we write our tests, let's consider what we would think of as the
+approrpriate behavior for \texttt{throw\_a\_coin} under the conditions
+we considered above. If \texttt{throw\_a\_coin} receives positive
+integer input, we want it to behave exactly as it currently does -\/-
+returning an output consisting of a list of characters 'H' or 'T' with
+the length of the list equal to the positive integer input. For a
+positive floating point input, we want \texttt{throw\_a\_coin\_properly}
+to treat the input as if it were rounded down to the nearest integer
+thus returning a list of 'H' or 'T' integers whose length is the same as
+the input rounded down to the next highest integer. For a any negative
+number input or an input of 0, we want \texttt{throw\_a\_coin\_properly}
+to return an empty list.
+
+    We create pytest tests by writing functions that start or end with
+"test". We'll use the \textbf{convention} that our tests will start with
+"test".
+
+We begin the code cell with ipytest's clean\_tests function as a way to
+clear out the results of previous tests starting with
+"test\_throw\_a\_coin" (the * is the standard wild card charater here).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{} the * after test\PYZus{}throw\PYZus{}a\PYZus{}coin tells this code cell to clean out the results}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} of all tests starting with test\PYZus{}throw\PYZus{}a\PYZus{}coin}
+        \PY{n}{ipytest}\PY{o}{.}\PY{n}{clean\PYZus{}tests}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}throw\PYZus{}a\PYZus{}coin*}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} run throw\PYZus{}a\PYZus{}coin with a variety of positive integer inputs (all numbers between 1 and 20) and}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} verify that the length of the output list (e.g [\PYZsq{}H\PYZsq{}, \PYZsq{}H\PYZsq{}, \PYZsq{}T\PYZsq{}, \PYZsq{}H\PYZsq{}, \PYZsq{}T\PYZsq{}]) matches the input integer}
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}throw\PYZus{}a\PYZus{}coin\PYZus{}length\PYZus{}positive}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+                \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{n}{n}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} verify that throw\PYZus{}a\PYZus{}coin produces an empty list (i.e. a list of length 0) if provide with an input}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} of 0}
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}throw\PYZus{}a\PYZus{}coin\PYZus{}length\PYZus{}zero}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}\PYZsh{} should be the empty array}
+            \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}
+            
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} verify that given a positive floating point input (i.e. 4.34344298547201), throw\PYZus{}a\PYZus{}coin produces a list of}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} coin flips of length equal to highest integer less than the input}
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}throw\PYZus{}a\PYZus{}coin\PYZus{}float}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{exponential}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+                
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} verify that given any negative input (e.g. \PYZhy{}323.4), throw\PYZus{}a\PYZus{}coin produces an empty}
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}throw\PYZus{}a\PYZus{}coin\PYZus{}negative}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{throw\PYZus{}a\PYZus{}coin}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}
+        
+                
+        \PY{n}{ipytest}\PY{o}{.}\PY{n}{run\PYZus{}tests}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    As you see, we were able to use pytest (and ipytest which allows us to
+run pytest tests in our ipython notebooks) to automate the tests that we
+constructed manually before and get the same errors and successes. Now
+time to fix our code and write our own test!
+
+     Question 5: You Better Test Yourself before You Wreck Yourself!
+
+Now it's time to fix \texttt{throw\_a\_coin} so that it passes the tests
+we've written above as well as add our own test to the mix!
+
+\textbf{5.1}. Write a new function called
+\texttt{throw\_a\_coin\_properly} that will pass the tests that we saw
+above. For your convenience we'll provide a new jupyter notebook cell
+with the tests rewritten for the new function. All the tests should
+pass. For a positive floating point input, we want
+\texttt{throw\_a\_coin\_properly} to treat the input as if it were
+rounded down to the nearest integer. For a any negative number input, we
+want \texttt{throw\_a\_coin\_properly} to treat the input as if it were
+0.
+
+\textbf{5.2}. Write a new test for \texttt{throw\_a\_coin\_properly}
+that verifies that all the elements of the resultant arrays are 'H' or
+'T'.
+
+    \paragraph{Answers}\label{answers}
+
+    \textbf{5.1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{throw\PYZus{}a\PYZus{}coin\PYZus{}properly}\PY{p}{(}\PY{n}{n\PYZus{}trials}\PY{p}{)}\PY{p}{:}
+            \PY{n}{n\PYZus{}trials} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{n\PYZus{}trials}\PY{p}{)}
+            \PY{k}{if} \PY{n}{n\PYZus{}trials} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n}{n\PYZus{}trials} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{n\PYZus{}trials}\PY{p}{)}
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{ipytest}\PY{o}{.}\PY{n}{clean\PYZus{}tests}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}throw\PYZus{}a\PYZus{}coin*}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}throw\PYZus{}a\PYZus{}coin\PYZus{}properly\PYZus{}length\PYZus{}positive}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+                \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{throw\PYZus{}a\PYZus{}coin\PYZus{}properly}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{n}{n}
+                
+        
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}throw\PYZus{}a\PYZus{}coin\PYZus{}properly\PYZus{}length\PYZus{}zero}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}\PYZsh{} should be the empty array}
+            \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{throw\PYZus{}a\PYZus{}coin\PYZus{}properly}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}
+            
+        
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}throw\PYZus{}a\PYZus{}coin\PYZus{}properly\PYZus{}float}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{exponential}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{throw\PYZus{}a\PYZus{}coin\PYZus{}properly}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+                
+        
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}throw\PYZus{}a\PYZus{}coin\PYZus{}properly\PYZus{}negative}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{throw\PYZus{}a\PYZus{}coin\PYZus{}properly}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}
+        
+                
+        \PY{n}{ipytest}\PY{o}{.}\PY{n}{run\PYZus{}tests}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{5.2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{ipytest}\PY{o}{.}\PY{n}{clean\PYZus{}tests}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}throw\PYZus{}a\PYZus{}coin*}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} write a test that verifies you don\PYZsq{}t have any other elements except H\PYZsq{}s and T\PYZsq{}s}
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}throw\PYZus{}a\PYZus{}coin\PYZus{}properly\PYZus{}verify\PYZus{}H\PYZus{}T}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+                \PY{n}{flips} \PY{o}{=} \PY{n}{throw\PYZus{}a\PYZus{}coin\PYZus{}properly}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+                \PY{n}{ct} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{flips}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{j}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{j}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{ct}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                \PY{k}{assert} \PY{n}{ct} \PY{o}{==} \PY{n}{n}
+                
+                
+        \PY{n}{ipytest}\PY{o}{.}\PY{n}{run\PYZus{}tests}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+        \PY{k}{def} \PY{n+nf}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{styles} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../../styles/cs109.css}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n}{HTML}\PY{p}{(}\PY{n}{styles}\PY{p}{)}
+        \PY{n}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
